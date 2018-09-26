@@ -1,0 +1,385 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>动态发布</title>
+	</head>
+	<style type="text/css">
+	html,body{
+		height: 100%;
+		margin:0;
+		padding:0;
+	}
+	.add_title_picture{
+		position: relative;
+		width: 100%;
+		height: 65%;
+		/*opacity:0.4;*//*透明度*/
+		background-image: url(./background.jpg);
+		background-size:100%;
+	}
+	.add_picture_box{
+		display: flex;
+		height: 64px;
+		padding-top: 190px;
+		padding-left:40%; 
+	}
+	.add_picture{
+		width: 64px;
+		height: 64px;
+	}
+	.add_picture_text_box{
+		margin-left: 20px;
+	}
+	.add_picture_title{
+		height: 40px;
+		line-height: 40px;
+	}
+	.add_pictutre_message{
+		height: 20px;
+		line-height: 20px;
+	}
+	.input_box{
+		position: absolute;
+		height: 60px;
+		width: 60%;
+		line-height: 60px;
+		margin-left: 20%;
+		bottom: 20px;
+		background: #ffffff;
+	}
+	.input{
+		height: 40px;
+		width: 96%;
+		outline:none;
+		margin-left: 2%;
+		border: #ffffff solid 0px;
+	}
+	.editer_box{
+		width: 100%;
+		display: flex;
+	}
+	.trends_message_box{
+		margin-top: 30px;
+		width:100%; 
+	}
+	.trends_message_boxs{
+		width:100%;
+		margin-top: 10px;
+	}
+	.editer_trends{
+		width:100%; 
+		/*overflow-y:visible;*/
+		outline:none;
+        border:solid #ffffff;
+        font-size:20px;
+	}
+	.editer_trends_box{
+		width:45%; 
+		margin-left: 20%;
+	}
+	.title_message{
+		width: 100%;
+		font-size: 30px;
+	}
+	.title_picture_box{
+		width: 100%;
+	}
+	.title_picture{
+		width: 100%;
+	}
+	.add_editer_box{
+		width: 150px;
+		margin-top: 30px;
+		margin-left: 5%;
+	}
+	.add_editer{
+		display: flex;
+		margin-top: 15px;
+	}
+
+	.add_title{
+		height: 32px;
+		line-height: 32px;
+		margin-left: 10px;
+		font-weight: 500;
+	}
+	.add_pictures{
+		width: 32px;
+		height: 32px;
+		border-radius: 32px;
+		border: #F0AA54 solid 0.5px;
+	}
+	.title_box{
+		width: 450px;
+		height: 100px;
+		display: flex;
+		justify-content: flex-start;
+        flex-wrap:wrap;
+        border: #bbbbbb solid 1px;
+        background: #ffffff;
+        display: none;
+	}
+	.add_title_box{
+		width: 315px;
+		height: 40px;
+		line-height: 40px;
+		border-radius: 2rem;
+		border: #bbbbbb solid 1px;
+		margin-left: 20px;
+		margin-top: 30px;
+		
+	}
+	.title{
+		width: 295px;
+		height: 30px;
+		margin-left: 15px;
+		border: #ffffff;
+		outline: none;
+	}
+	.button{
+		width: 90px;
+		height: 40px;
+		border-radius: 2rem;
+		margin-left: 5px;
+		margin-top: 30px;
+		background: #ffffff;
+		outline: none;
+	}
+	.add_message{
+
+	}
+	</style>
+<body>
+	<div class="add_title_picture" id="add_title_picture" >
+		<div class="add_picture_box" >
+			<img class="add_picture" src="./icon/add_picture.png">
+			<div class="add_picture_text_box">
+				<div class="add_picture_title"><font size="5" face="Times"face="verdana">设置游记大图</font></div>
+				<div class="add_pictutre_message"><font size="4" face="Times"face="verdana"color="#444343">图片建议为高清大图</font></div>
+			</div>
+		</div>
+		<div class="input_box">
+			<input type="text" placeholder="填写游记标题" class="input"/>
+		</div>
+			
+	</div>
+	<div class="editer_box" id="editer_box">
+		<div class="editer_trends_box" id="editer_trends_box">
+			<div class="trends_message_box" onclick="Div_id(this)">
+				<textarea class="editer_trends" placeholder="记录美好旅行...." onclick="GetId(this)" ></textarea>
+			</div>
+		</div>
+	<div class="add_editer_box" id="add_editer_box">
+		<div class="add_editer" onclick="add_button(1)"><img class="add_pictures" src="./icon/picture.png"><div class="add_title">加入图片</div></div>
+		<div class="add_editer"><img class="add_pictures" src="./icon/face.png"><div class="add_title">加入表情</div></div>
+		<div class="add_editer"><img class="add_pictures" src="./icon/video.png"><div class="add_title">加入视频</div></div>
+		<div class="add_editer" onclick="add_title()"><img class="add_pictures" src="./icon/title.png"><div class="add_title">加入标题</div></div>
+	</div>
+	<div class="title_box" id="title_box">
+		<div class="add_title_box">
+        	<input type="text" placeholder="加入小标题" class="title" id="add_title1"/>
+        </div>
+        <button type="button" class="button" onclick="add_button(0)">添加</button>
+    </div>
+</div>
+</body>
+<script src='js/jquery-1.11.0.min.js'></script>
+<script id="add_title" type="text/template">
+    <div class="title_message" id="{title_message_id}">{title}</div>
+    <div class="editer_trends_box"><textarea class="editer_trends" placeholder="记录" id="{editer_trends_id}"></textarea></div>
+ </script>
+ <script id="add_img" type="text/template">
+    <div class="add_image_box" id="{add_tltle_id}">
+        <div></div>
+    </div>
+ </script>
+<script type="text/javascript">
+	var a=0;
+	var text_id=0;
+		$(document).ready(function(){
+			getAbsoluteTop('add_editer_box');
+			getAbsoluteLeft('add_editer_box');
+			var elems=document.getElementById("title_box");//获取控件
+				  elems.style.position = "absolute";//设置绝对定位（或者相对定位）
+				  elems.style.left = oLeft-440+"px";//设置left数值
+				  elems.style.top =oTop+70+"px";//设置top数值
+		});
+		//getAbsoluteTop(add_editer_box);
+		window.onscroll = function() {//为了保证兼容性，这里取两个值，哪个有值取哪一个
+			
+			var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+　　			//scrollTop就是触发滚轮事件时滚轮的高度
+			if(scrollTop>oTop){
+				//alert('开始改变位置');
+				var elem=document.getElementById("add_editer_box");//获取控件
+				  elem.style.position = "absolute";//设置绝对定位（或者相对定位）
+				  elem.style.left = oLeft+"px";//设置left数值
+				  elem.style.top =scrollTop+"px";//设置top数值
+				var elems=document.getElementById("title_box");//获取控件
+				  elems.style.position = "absolute";//设置绝对定位（或者相对定位）
+				  elems.style.left = oLeft-440+"px";//设置left数值
+				  elems.style.top =scrollTop+70+"px";//设置top数值
+			}
+			else{
+				var elem=document.getElementById("add_editer_box");//获取控件
+				  elem.style.position = "absolute";//设置绝对定位（或者相对定位）
+				  elem.style.left = oLeft+"px";//设置left数值
+				  elem.style.top =oTop+"px";//设置top数值
+				var elems=document.getElementById("title_box");//获取控件
+				  elems.style.position = "absolute";//设置绝对定位（或者相对定位）
+				  elems.style.left = oLeft-440+"px";//设置left数值
+				  elems.style.top =oTop+70+"px";//设置top数值
+			}
+			//alert(scrollTop);
+		}
+		function Div_id(id){
+			div_id=id;
+		}
+		function add_button(value){
+			text_id++;
+			alert(pre);
+			var str=click.value;
+			alert(str);
+			str=str.replace(pre,""); 
+			alert(str);
+			click.value=pre;
+			if(value==0){
+				var nextdiv=document.createElement("div");
+				nextdiv.className="trends_message_boxs";
+				var textarea=document.createElement("textarea");
+				textarea.className="editer_trends";
+				textarea.onclick=GetId(textarea);
+				textarea.value=str;
+				nextdiv.appendChild(textarea);
+				x=nextdiv.getElementsByTagName("textarea");
+				x[0].style.height="40px"
+				var fatherdiv=document.createElement("div");
+				var add_title1=document.getElementById("add_title1");
+				fatherdiv.className="title_message";
+				var node=document.createTextNode(add_title1.value);
+				fatherdiv.appendChild(node);
+				insertAfter(fatherdiv,div_id);
+				insertAfter(nextdiv,div_id);
+				document.getElementById("title_box").style.display="none";
+				a=0;
+			}
+			else if(value==1){
+				var nextdiv=document.createElement("div");
+				nextdiv.className="trends_message_boxs";
+				var textarea=document.createElement("textarea");
+				textarea.className="editer_trends";
+				textarea.onclick=GetId(textarea);
+				textarea.value=str;
+				nextdiv.appendChild(textarea);
+				x=nextdiv.getElementsByTagName("textarea");
+				x[0].style.height="40px"
+				var fatherdiv=document.createElement("div");
+				fatherdiv.className="title_picture_box";
+				var img=document.createElement("img");
+				img.className="title_picture";
+				img.src="./test.jpg";
+				fatherdiv.appendChild(img);
+				insertAfter(fatherdiv,div_id);
+				insertAfter(nextdiv,div_id);
+			}		
+		}
+		function insertAfter(newElement, targetElement){
+			alert("addaddadd");
+		    var parent = targetElement.parentNode;
+		    if(parent.lastChild == targetElement){
+		    	newElement.onclick=Div_id(newElement);
+		        parent.appendChild(newElement);
+		    }else{
+		    	newElement.onclick=Div_id(newElement);
+		        parent.insertBefore(newElement,targetElement.nextSibling);
+		    }
+		}
+		function GetId(el)
+		{
+			click=el;
+			id=event.srcElement.id;
+			makeExpandingArea(el);
+		}
+		//获取控件上绝对位置
+		function getAbsoluteTop(objectId) {
+		o = document.getElementById(objectId);
+		oTop = o.offsetTop;
+		while(o.offsetParent!=null)
+		{  
+		oParent = o.offsetParent 
+		oTop += oParent.offsetTop  // Add parent top position
+		o = oParent
+		}
+		oTop=oTop-30;
+		return oTop
+		}
+		//获取控件左绝对位置
+		function getAbsoluteLeft(objectId) {
+		o = document.getElementById(objectId);
+		oLeft = o.offsetLeft-110;
+		return oLeft
+		}
+	 // textarea 自适应高度  
+		function makeExpandingArea(el) {  
+		    var setStyle = function(el) {  
+		        el.style.height = 'auto';  
+		        el.style.height = el.scrollHeight + 'px';  
+		        // console.log(el.scrollHeight);  
+		    }  
+		    var delayedResize = function(el) {  
+		        window.setTimeout(function() {  
+		                setStyle(el)  
+		            },  
+		            0);  
+		    }  
+		    if (el.addEventListener) {  
+		        el.addEventListener('input', function() {  
+		            setStyle(el)  
+		        }, false);  
+		        setStyle(el)  
+		    } else if (el.attachEvent) {  
+		        el.attachEvent('onpropertychange', function() {  
+		            setStyle(el)  
+		        });  
+		        setStyle(el)  
+		    }  
+		    if (window.VBArray && window.addEventListener) { //IE9  
+		        el.attachEvent("onkeydown", function() {  
+		            var key = window.event.keyCode;  
+		            if (key == 8 || key == 46) delayedResize(el);  
+		        });  
+		        el.attachEvent("oncut", function() {  
+		            delayedResize(el);  
+		        }); //处理粘贴  
+		    }  
+		}  
+		// makeExpandingArea(editer_trends); 
+		function add_title(){
+			
+			a++;
+			if(a==1){
+				document.getElementById("title_box").style.display="flex";
+				getCursorPos(click);
+			}
+			if(a==2){
+				document.getElementById("title_box").style.display="none";
+				a=0;
+			}
+			
+		}
+		function getCursorPos(pTextArea) {
+		  	var cursurPosition=-1;
+		  	if(pTextArea.selectionStart || pTextArea.selectionStart == '0'){//非IE浏览器
+		        cursurPosition= pTextArea.selectionStart;
+		    }else{//IE
+		        var range = document.selection.createRange();
+		        range.moveStart("character",-pTextArea.value.length);
+		        cursurPosition=range.text.length;
+		    }
+		    var textBox = click;
+        	pre = textBox.value.substr(0, cursurPosition);
+		    return cursurPosition;
+		}
+</script>
+</html>
